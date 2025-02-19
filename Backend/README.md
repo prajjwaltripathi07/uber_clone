@@ -131,3 +131,58 @@ The request body should be a JSON object containing the following fields:
 **Notes:**
 - The `email` field must be a valid email address.
 - The `password` field must be at least 6 characters long.
+
+### GET /users/profile
+
+**Description:** Get the profile of the authenticated user.
+
+**Headers:**
+- `Authorization`: Bearer token
+
+**Response:**
+- **200 OK**
+  ```json
+  {
+    "_id": "user_id",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "user@example.com"
+    // ...other user fields...
+  }
+  ```
+- **401 Unauthorized**
+  ```json
+  {
+    "message": "Unauthorized"
+  }
+  ```
+
+**Notes:**
+- The `Authorization` header must contain a valid JWT token.
+
+### GET /users/logout
+
+**Description:** Logout the authenticated user.
+
+**Headers:**
+- `Authorization`: Bearer token
+
+**Response:**
+- **200 OK**
+  ```json
+  {
+    "message": "Logged Out"
+  }
+  ```
+- **401 Unauthorized**
+  ```json
+  {
+    "message": "Unauthorized"
+  }
+  ```
+
+**Notes:**
+- The `Authorization` header must contain a valid JWT token.
+- The token will be added to a blacklist to prevent further use.
