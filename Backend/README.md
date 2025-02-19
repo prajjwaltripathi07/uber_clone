@@ -1,6 +1,8 @@
-# User Registration Endpoint Documentation
+# Backend API Documentation
 
-## Endpoint: `/users/register`
+## Endpoints
+
+### POST /users/register
 
 ### Method: POST
 
@@ -73,3 +75,59 @@ The request body should be a JSON object containing the following fields:
 ### Notes:
 - Ensure that the `Content-Type` header is set to `application/json` when making the request.
 - The password is hashed before being stored in the database.
+
+### POST /users/login
+
+**Description:** Login a user.
+
+**Request Body:**
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+**Response:**
+- **200 OK**
+  ```json
+  {
+    "token": "jwt_token",
+    "user": {
+      "_id": "user_id",
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "user@example.com"
+      // ...other user fields...
+    }
+  }
+  ```
+- **400 Bad Request**
+  ```json
+  {
+    "errors": [
+      {
+        "msg": "Invalid Email",
+        "param": "email",
+        "location": "body"
+      },
+      {
+        "msg": "password must be atleast 6 characters long",
+        "param": "password",
+        "location": "body"
+      }
+    ]
+  }
+  ```
+- **401 Unauthorized**
+  ```json
+  {
+    "message": "Invalid Email or Password"
+  }
+  ```
+
+**Notes:**
+- The `email` field must be a valid email address.
+- The `password` field must be at least 6 characters long.
