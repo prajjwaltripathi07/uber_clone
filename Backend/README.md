@@ -278,3 +278,142 @@ The request body should be a JSON object containing the following fields:
 - The `email` field must be a valid email address.
 - The `password` field must be at least 6 characters long.
 - The `vehicle` object must contain valid `color`, `capacity`, `plate`, and `vehicleType` fields.
+
+### POST /captains/login
+
+**Description:** Login a captain.
+
+**Request Body:**
+```json
+{
+  "email": "captain@example.com",
+  "password": "password123"
+}
+```
+
+**Response:**
+- **200 OK**
+  ```json
+  {
+    "token": "jwt_token",
+    "captain": {
+      "_id": "captain_id",
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "captain@example.com",
+      "vehicle": {
+        "color": "red",
+        "capacity": 4,
+        "plate": "ABC123",
+        "vehicleType": "car"
+      }
+      // ...other captain fields...
+    }
+  }
+  ```
+- **400 Bad Request**
+  ```json
+  {
+    "errors": [
+      {
+        "msg": "Invalid email address",
+        "param": "email",
+        "location": "body"
+      },
+      {
+        "msg": "Password must be at least 6 characters long",
+        "param": "password",
+        "location": "body"
+      }
+    ]
+  }
+  ```
+- **401 Unauthorized**
+  ```json
+  {
+    "errors": [
+      {
+        "msg": "Invalid password"
+      }
+    ]
+  }
+  ```
+- **404 Not Found**
+  ```json
+  {
+    "errors": [
+      {
+        "msg": "Captain not found"
+      }
+    ]
+  }
+  ```
+
+**Notes:**
+- The `email` field must be a valid email address.
+- The `password` field must be at least 6 characters long.
+
+### GET /captains/profile
+
+**Description:** Get the profile of the authenticated captain.
+
+**Headers:**
+- `Authorization`: Bearer token
+
+**Response:**
+- **200 OK**
+  ```json
+  {
+    "captain": {
+      "_id": "captain_id",
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "captain@example.com",
+      "vehicle": {
+        "color": "red",
+        "capacity": 4,
+        "plate": "ABC123",
+        "vehicleType": "car"
+      }
+      // ...other captain fields...
+    }
+  }
+  ```
+- **401 Unauthorized**
+  ```json
+  {
+    "message": "Unauthorized"
+  }
+  ```
+
+**Notes:**
+- The `Authorization` header must contain a valid JWT token.
+
+### GET /captains/logout
+
+**Description:** Logout the authenticated captain.
+
+**Headers:**
+- `Authorization`: Bearer token
+
+**Response:**
+- **200 OK**
+  ```json
+  {
+    "message": "Logged out successfully"
+  }
+  ```
+- **401 Unauthorized**
+  ```json
+  {
+    "message": "Unauthorized"
+  }
+  ```
+
+**Notes:**
+- The `Authorization` header must contain a valid JWT token.
+- The token will be added to a blacklist to prevent further use.
