@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useContext, useEffect, useState } from 'react'
-import { CaptainDataContext } from '../context/CaptainContext'
+import { CaptainDataContext } from '../context/CapatainContext'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
@@ -22,8 +21,8 @@ const CaptainProtectWrapper = ({
         if (!token) {
             navigate('/captain-login')
         }
-        // console.log(import.meta.env.VITE_API_URL)
-        axios.get(`${import.meta.env.VITE_API_URL}/captains/profile`, {
+
+        axios.get(`${import.meta.env.VITE_BASE_URL}/captains/profile`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -31,7 +30,6 @@ const CaptainProtectWrapper = ({
             if (response.status === 200) {
                 setCaptain(response.data.captain)
                 setIsLoading(false)
-                // console.log(import.meta.env.VITE_API_URL)
             }
         })
             .catch(err => {

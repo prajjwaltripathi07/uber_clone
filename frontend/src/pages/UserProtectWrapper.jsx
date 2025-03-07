@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from 'react'
@@ -13,14 +12,13 @@ const UserProtectWrapper = ({
     const navigate = useNavigate()
     const { user, setUser } = useContext(UserDataContext)
     const [ isLoading, setIsLoading ] = useState(true)
-    // console.log(import.meta.env.VITE_BASE_URL)
 
     useEffect(() => {
         if (!token) {
             navigate('/login')
         }
 
-        axios.get(`${import.meta.env.VITE_API_URL}/users/profile`, {
+        axios.get(`${import.meta.env.VITE_BASE_URL}/users/profile`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -35,7 +33,7 @@ const UserProtectWrapper = ({
                 localStorage.removeItem('token')
                 navigate('/login')
             })
-    }, [ token,navigate ])
+    }, [ token ])
 
     if (isLoading) {
         return (
