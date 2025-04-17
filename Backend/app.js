@@ -29,11 +29,7 @@ app.use('/maps', mapsRoutes);
 app.use('/rides', rideRoutes);
 
 
-const corsOptions = {
-    origin: ['https://uber-clone-jet-nine.vercel.app'], // Replace with your frontend's deployed URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-    credentials: true, // Allow cookies to be sent
-};
+
 
 app.use(cors(corsOptions));
 
