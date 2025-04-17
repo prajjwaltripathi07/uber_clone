@@ -2,6 +2,7 @@ const userModel = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const blackListModel = require('../models/blackListToken.model');
+
 const captainModel = require('../models/captain.model');
 //done changed the name of the model to blackListModel
 
