@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const blackListTokenModel = require('../models/blackListToken.model');
 const captainModel = require('../models/captain.model');
-
+//done changed the name of the model to blackListTokenModel
 
 module.exports.authUser = async (req, res, next) => {
     const token = req.cookies.token || req.headers.authorization?.split(' ')[ 1 ];
