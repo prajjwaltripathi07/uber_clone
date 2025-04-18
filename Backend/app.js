@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: ['https://uber-clone-jet-nine.vercel.app'], // Replace with your frontend's deployed URL
+    origin: ['https://uber-clone-ecru.vercel.app'], // Replace with your frontend's deployed URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
     credentials: true, // Allow cookies to be sent
 };
