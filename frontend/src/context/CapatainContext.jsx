@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 
 export const CaptainDataContext = createContext();
 
@@ -22,6 +20,11 @@ const CaptainContext = ({ children }) => {
         setError,
         updateCaptain
     };
+
+    // useEffect(() => {
+    //   console.log(captain);
+    // }, [captain])
+    
 
     return (
         <CaptainDataContext.Provider value={value}>

@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { createContext, useState } from 'react'
 
 export const UserDataContext = createContext()
@@ -14,10 +12,11 @@ const UserContext = ({ children }) => {
             lastName: ''
         }
     })
+    const [rideData, setRideData] = useState(null)
 
     return (
         <div>
-            <UserDataContext.Provider value={{ user, setUser }}>
+            <UserDataContext.Provider value={{ user, setUser, rideData, setRideData }}>
                 {children}
             </UserDataContext.Provider>
         </div>

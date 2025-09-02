@@ -1,27 +1,27 @@
 const userModel = require('../models/user.model');
 const userService = require('../services/user.service');
 const { validationResult } = require('express-validator');
-const blackListTokenModel = require('../models/blackListToken.model');
+const blackListTokenModel = require('../models/blacklistToken.model');
 
-module.exports.registerUser = async (req, res, next) => {
 
+module.exports.RegisterUser = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { fullname, email, password } = req.body;
+    const {fullname, email, password} = req.body;
 
-    const isUserAlready = await userModel.findOne({ email });
+    const isUserAlreadyExist = await userModel.findOne({email});
 
-    if (isUserAlready) {
-        return res.status(400).json({ message: 'User already exist' });
+    if(isUserAlreadyExist){
+        return res.status(400).json({message: 'User already exist with this email'});
     }
 
     const hashedPassword = await userModel.hashPassword(password);
 
     const user = await userService.createUser({
-        firstname: fullname.firstname,
+        firstname: fullname.firstname, 
         lastname: fullname.lastname,
         email,
         password: hashedPassword
@@ -29,51 +29,49 @@ module.exports.registerUser = async (req, res, next) => {
 
     const token = user.generateAuthToken();
 
-    res.status(201).json({ token, user });
-
+    res.status(201).json({token, user });
 
 }
 
-module.exports.loginUser = async (req, res, next) => {
-
+module.exports.LoginUser = async (req, res, next) => { 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
+    const {email, password} = req.body;
 
-    const user = await userModel.findOne({ email }).select('+password');
+    const user = await userModel.findOne({email}).select('+password');
+    //becoz on finding user password by default is not selected so we have to select it explicitly
 
-    if (!user) {
-        return res.status(401).json({ message: 'Invalid email or password' });
+    if(!user){
+        return res.status(401).json({message: 'Invalid email or password'});
     }
 
-    const isMatch = await user.comparePassword(password);
+    const isValid = await user.comparePassword(password);
 
-    if (!isMatch) {
-        return res.status(401).json({ message: 'Invalid email or password' });
+    if(!isValid){
+        return res.status(401).json({message: 'Invalid email or password'});
     }
 
     const token = user.generateAuthToken();
 
     res.cookie('token', token);
 
-    res.status(200).json({ token, user });
+    res.status(200).json({token, user});
+
 }
 
-module.exports.getUserProfile = async (req, res, next) => {
-
+module.exports.getUserProfile = async (req,res, next) => {
     res.status(200).json(req.user);
-
 }
 
 module.exports.logoutUser = async (req, res, next) => {
     res.clearCookie('token');
-    const token = req.cookies.token || req.headers.authorization.split(' ')[ 1 ];
 
-    await blackListTokenModel.create({ token });
+    const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
 
-    res.status(200).json({ message: 'Logged out' });
+    await blackListTokenModel.create({token});
 
+    res.status(200).json({message: 'Logged out successfully'});
 }

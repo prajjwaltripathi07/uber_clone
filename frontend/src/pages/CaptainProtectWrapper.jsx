@@ -1,15 +1,11 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-import React, { useContext, useEffect, useState } from 'react'
-import { CaptainDataContext } from '../context/CapatainContext'
-import { useNavigate } from 'react-router-dom'
+import React,{useContext, useEffect, useState} from 'react'
+import {useNavigate} from 'react-router-dom'
+import {CaptainDataContext} from '../context/CaptainContext'
 import axios from 'axios'
 
-const CaptainProtectWrapper = ({
-    children
-}) => {
+const CaptainProtectWrapper = ({children}) => {
 
-    const token = localStorage.getItem('token')
+  const token = localStorage.getItem('token')
     const navigate = useNavigate()
     const { captain, setCaptain } = useContext(CaptainDataContext)
     const [ isLoading, setIsLoading ] = useState(true)
@@ -28,7 +24,7 @@ const CaptainProtectWrapper = ({
             }
         }).then(response => {
             if (response.status === 200) {
-                setCaptain(response.data.captain)
+                setCaptain(response.data)
                 setIsLoading(false)
             }
         })

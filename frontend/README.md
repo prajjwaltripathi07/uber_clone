@@ -1,56 +1,69 @@
-# Uber Clone Frontend
-
-This project is a frontend clone of the Uber application built with React and Vite.
-
-## Pages
-
-- **Home Page**: The main landing page of the application.
-- **Login Page**: The page where users can log in to their accounts.
-- **Signup Page**: The page where new users can create an account.
-- **Profile Page**: The page where users can view and edit their profile information.
-- **Ride History Page**: The page where users can view their past rides.
-- **Booking Page**: The page where users can book a new ride.
-- **Payment Page**: The page where users can manage their payment methods.
-- **Support Page**: The page where users can contact support for help.
+# RideSimple Frontend
 
 ## Getting Started
 
-To get started with the project, follow these steps:
+To run the frontend:
+1. Open a terminal in `RideSimple/frontend`
+2. Run: npm install
+3. Run: npm run dev
+4. Open your browser at the displayed localhost URL
 
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/your-username/uber_clone.git
-    ```
+## Pages Overview
 
-2. Navigate to the frontend directory:
-    ```sh
-    cd uber_clone/frontend
-    ```
+### User-facing Pages
+- **Start.jsx**: Landing page that introduces users to RideSimple and directs them to login/signup.
+- **Login.jsx & Signup.jsx**: Authentication interfaces for users with form validation.
+- **Home.jsx**: User dashboard featuring:
+  - Location search with autocomplete
+  - Fare calculation based on distance
+  - Ride options selection
+  - Payment method selection
+  - Ride confirmation panel
+- **Riding.jsx**: Active ride interface showing:
+  - Live tracking map
+  - Driver details and vehicle information
+  - OTP verification
+  - Pickup and destination details
+  - Fare information
+  - Payment processing with redirect
 
-3. Install the dependencies:
-    ```sh
-    npm install
-    ```
+### Captain-facing Pages
+- **CaptainLogin.jsx & CaptainSignup.jsx**: Authentication for drivers with vehicle registration.
+- **CaptainHome.jsx**: Driver dashboard showing:
+  - Availability toggle
+  - Nearby ride requests
+  - Earnings overview
+  - Heat map for high-demand areas
+- **CaptainRiding.jsx**: Interface for active rides showing:
+  - Live tracking
+  - Navigation directions
+  - Passenger details
+  - Ride completion options
 
-4. Start the development server:
-    ```sh
-    npm run dev
-    ```
+## Core Components
+- **LiveTracking.jsx**: Real-time map component using Mapbox integration.
+- **LocationSearch.jsx**: Geocoding and location search component.
 
-5. Open your browser and navigate to `http://localhost:3000`.
+## Project Screenshots
 
-## Available Scripts
+### User Interface
+<!-- Add screenshots here -->
+![Landing Page](./public/landingPage.png)
+![User Home](./public/UserSignIn.png)
+![Booking Process](./public/BookingProcess.png)
+![Active Ride](./public/ActiveRide.png)
 
-In the project directory, you can run:
+### Captain Interface
+<!-- Add screenshots here -->
+![Captain Dashboard](./public/captainDashboard.png)
+![Ride Request](./public/RideRequest.png)
+![Navigation Screen](./public/NavRIde.png)
 
-- `npm run dev`: Starts the development server.
-- `npm run build`: Builds the app for production.
-- `npm run lint`: Runs the linter to check for code quality issues.
 
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the MIT License.
+## Technology Stack
+- React.js with Hooks and Context API
+- Socket.IO for real-time communication
+- Mapbox for mapping and navigation
+- Tailwind CSS for styling
+- Axios for API requests
+- React Router for navigation

@@ -1,16 +1,30 @@
-/* eslint-disable no-unused-vars */
-
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import image from '../assets/front.png'
 
 const Start = () => {
   return (
-    <div>
-      <div className='bg-cover bg-center bg-[url(https://images.unsplash.com/photo-1619059558110-c45be64b73ae?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)] h-screen pt-8 flex justify-between flex-col w-full'>
-        <img className='w-16 ml-8' src="https://cdn-assets-eu.frontify.com/s3/frontify-enterprise-files-eu/eyJwYXRoIjoid2VhcmVcL2ZpbGVcLzhGbTh4cU5SZGZUVjUxYVh3bnEyLnN2ZyJ9:weare:F1cOF9Bps96cMy7r9Y2d7affBYsDeiDoIHfqZrbcxAw?width=1200&height=417" alt="" />
-        <div className='bg-white pb-8 py-4 px-4'>
-          <h2 className='text-[30px] font-semibold'>Get Started with Uber</h2>
-          <Link to='/login' className='flex items-center justify-center w-full bg-black text-white py-3 rounded-lg mt-5'>Continue</Link>
+    <div style={{ fontFamily: "'Times New Roman', serif" }}>
+      <div
+        className="bg-cover bg-bottom h-screen pt-10  flex justify-between flex-col w-full"
+        style={{ backgroundImage: `url(${image})` }}
+      >
+        <img className="w-80 -ml-20 -mt-6"  alt="Logo"/>
+        <div className="pb-7 py-4 px-4 inset-0 bottom-0 bg-gradient-to-b from-gray-400/50 to-transparent ">
+          <div className="text-3xl font-bold text-white">
+           <span className='text-black'>Ride</span>  with ease arrive with style
+          </div>
+          <h4 className="text-white">
+            Wherever life takes you—from quick commutes to grand adventures—ride
+            with comfort, safety, and reliability. Your journey matters, and
+            we’re here to make every mile effortless.
+          </h4>
+          <Link
+            to="/login"
+            className="flex items-center justify-center w-[90%] bg-black text-white py-3 rounded-xl mt-5 ml-4"
+          >
+            Continue
+          </Link>
         </div>
       </div>
     </div>
