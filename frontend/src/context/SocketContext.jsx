@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { createContext, useEffect } from 'react';
 import { io } from 'socket.io-client';
 
